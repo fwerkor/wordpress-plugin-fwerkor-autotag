@@ -3,7 +3,7 @@
  * Plugin Name: FWERKOR Auto Tag
  * Plugin URI: https://github.com/fwerkor/wordpress-plugin-fwerkor-autotag
  * Description: Conservative keyword-based automatic tagging for WordPress posts.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: FWERKOR
  * License: GPL-2.0-or-later
  * Requires at least: 6.0
