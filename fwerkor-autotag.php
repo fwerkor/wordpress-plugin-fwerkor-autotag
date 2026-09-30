@@ -3,7 +3,7 @@
  * Plugin Name: FWERKOR Auto Tag
  * Plugin URI: https://github.com/fwerkor/wordpress-plugin-fwerkor-autotag
  * Description: Conservative keyword-based automatic tagging for WordPress posts.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: FWERKOR
  * License: GPL-2.0-or-later
  * Requires at least: 6.0
@@ -102,8 +102,14 @@ final class FWERKOR_Auto_Tag {
         );
         $text = preg_replace('/\s+/u', ' ', $text) ?: $text;
 
+        $category_names = wp_get_post_categories($post_id, array('fields' => 'names'));
+        $category_names = array_map(array($this, 'lower'), is_array($category_names) ? $category_names : array());
+
         $candidates = array();
         foreach ($dictionary as $canonical => $aliases) {
+            if (in_array($this->lower($canonical), $category_names, true)) {
+                continue;
+            }
             foreach ($aliases as $alias) {
                 if ($this->contains($text, $alias)) {
                     $candidates[$this->lower($canonical)] = $canonical;
